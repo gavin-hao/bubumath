@@ -1,0 +1,74 @@
+<div class="wx-title">
+	<div class="wx-line"></div>
+	<span class="arrow"><span class="wx-caret"></span></span>
+</div>
+<div class="main-content">
+	<div class="mt-20">
+		<form name="form-name" role="form" action="/wx/updateusername" method="POST" data-validate="true" novalidate="true">
+			<div class="form-group ">
+				<label for="username ">学习账号</label>
+				<input type="text " class="form-control " id="username " name="username" required data-msg-required="请填写学习账号" maxlength="20"
+					isusername="true" rangelength="0,20" data-msg-rangelength="太长了哦，不能超过20个字符" placeholder="学习账号 " value="<%=username%>">
+			</div>
+			<button type="submit" name="updateusername" class="btn-bubu ">修改</button>
+		</form>
+	</div>
+
+</div>
+
+<p class="text-center ">修改密码</p>
+<div class="wx-title ">
+	<div class="wx-line "></div>
+	<span class="arrow "><span class="wx-caret "></span></span>
+</div>
+<div class="main-content ">
+	<div class="mt-20 ">
+		<form name="form-pwd" role="form" action="/wx/updatepassword" method="POST" data-validate="true " novalidate="true">
+			<div class="form-group ">
+				<label for="oldpassword ">原密码</label>
+				<input type="password" class="form-control " id="oldpassword" name="oldpassword" required data-msg-required="请填写原密码" placeholder="********"
+				/>
+			</div>
+			<div class="form-group ">
+				<label for="newpassword ">新密码</label>
+				<input type="password" class="form-control " id="newpassword" name="newpassword" required data-msg-required="请填写新密码" placeholder="******** ">
+			</div>
+			<button type="submit " name="updatepassword" class="btn-bubu ">修改</button>
+		</form>
+	</div>
+	<div class="mt-20 ">
+		<div class="wx-tip-img "><img data-src-800px="/images/zhu1.png " /></div>
+	</div>
+	<div class="mt-20 text-center ">
+		<a class="btn-bubu btn-4 " href="/wx/profile ">宝宝资料</a>
+	</div>
+
+</div>
+<p class="text-center mt-20">账号绑定</p>
+<div class="wx-title ">
+	<div class="wx-line "></div>
+	<span class="arrow "><span class="wx-caret "></span></span>
+</div>
+<div class="main-content ">
+	<div class="mt-20 text-center ">
+		<%if(!wechatAuth){%>
+			<form action="/link/wechat" method="GET">
+				<input type="hidden" name="provider" value="wechat" />
+				<button type="submit" class="btn-bubu btn-4 ">绑定微信</button>
+			</form>
+			<%}else{%>
+				<form id="disass" action="/wx/disassociate?returnTo=/logout" method="GET">
+					<input type="hidden" name="provider" value="wechat" />
+					<input type="hidden" name="providerKey" value="<%=wechatAuth.id%>" />
+					<button type="button" id="btn-disassociate" class="btn-bubu btn-4 ">解除绑定</button>
+				</form>
+				<%}%>
+	</div>
+</div>
+<script type="text/javascript">
+$('#btn-disassociate').click(function(){
+	if(confirm("解除绑定后将不能在微信中查看孩子的学习报告，确定要解除绑定？")){
+	$('#disass').submit();
+	}
+})
+</script>

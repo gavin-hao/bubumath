@@ -1,0 +1,22 @@
+body {
+  font: 14px  "Helvetica Neue",Helvetica, Arial, sans-serif,Microsoft Yahei;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+@media (min-width: 1600px){
+.container{width: 1600px;}
+}
+.idx_bg{
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
+}
+.has-error span.error{
+  color: #f44336
+}

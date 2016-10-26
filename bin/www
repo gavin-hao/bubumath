@@ -1,0 +1,109 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('wechat_server:server');
+var http = require('http');
+//leancloud SDK
+var AV = require('leanengine');
+
+AV.init({
+  appId: process.env.LEANCLOUD_APP_ID || '1Wc1dUpbqxRhtP1q4nW9QRGY-gzGzoHsz',
+  appKey: process.env.LEANCLOUD_APP_KEY || 'dnmROpv9o8W3Nuv2PkXHCCYm',
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'kQH3hkiGecAflwN6pjmPO9Uv'
+});
+// 如果不希望使用 masterKey 权限，可以将下面一行删除
+AV.Cloud.useMasterKey();
+/**
+ * Get port from environment and store in Express.
+ */
+// 端口一定要从环境变量 `LEANCLOUD_APP_PORT` 中获取。
+// LeanEngine 运行时会分配端口并赋值到该变量。
+var port = normalizePort(process.env.LEANCLOUD_APP_PORT || process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port, function () {
+  console.log('bubumath server listening on port ' + app.get('port'));
+  // 注册全局未捕获异常处理器
+  process.on('uncaughtException', function (err) {
+    console.error("Caught exception:", err.stack);
+  });
+  process.on('unhandledRejection', function (reason, p) {
+    console.error("Unhandled Rejection at: Promise ", p, " reason: ", reason.stack);
+  });
+});
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

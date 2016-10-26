@@ -1,0 +1,169 @@
+html {
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  /*overflow-y: scroll;*/
+  /* 0 */
+  -webkit-overflow-scrolling: touch;
+  /* 0 */ }
+body {
+  font: 16px  "Helvetica Neue",Helvetica, Arial, sans-serif,Microsoft Yahei;
+  margin: 0;
+  padding: 0;
+  background-color: #fff4d6;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  color: #4f0e0f;
+  font-size: 16px;
+
+}
+.wx-radio-inline .radio{
+    display: inline-block;
+}
+.wx-container{
+    margin: 0 auto;
+    max-width: 992px;
+    padding-bottom: 50px;
+}
+.head-bg img {
+    display: block;
+    content: url(../images/beijing.png);
+    height: auto;
+    width: 100%;
+}
+.wx-tip-img img{
+     display: block;
+    content: url(../images/zhu1.png);
+    height: auto;
+    width: 100%;
+}
+.wx-tip-img2 img{
+     display: block;
+    content: url(../images/zhu2.png);
+    height: auto;
+    width: 100%;
+}
+@media (min-device-width: 768px){
+.head-bg img[data-src-800px] {
+    margin: 0 auto;
+    content: url(../images/beijing.png);
+}
+.wx-tip-img img[data-src-800px]{
+     margin: 0 auto;
+    content: url(../images/zhu1.png);
+   
+}
+.wx-tip-img2 img{
+     margin: 0 auto;
+    content: url(../images/zhu2.png);
+    
+}
+}
+.wx-title{
+    margin-top:10px; 
+    text-align: center;
+}
+.wx-title .wx-line{
+    border-top:2px solid #78191f 
+}
+
+.wx-caret{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0px;
+    vertical-align: middle;
+    border-top: 14px solid;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+}
+.wx-container label{
+    
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 15px;
+    font-weight: normal;
+    font-size: 16px;
+}
+.wx-title span.arrow{
+    background-color: #fff4d6;
+    /*color:  rgb(79,14,15);;*/
+    color: #4f0e0f;
+    position: relative;
+    top: -6px;
+    padding: 0px 30px;
+
+}
+.wx-container .form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #4f0e0f;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #4f0e0f;
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: 0;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+a.btn-pic {
+    text-decoration: none;
+}
+a:active, a:hover {
+  outline: 0;
+}
+.main-content{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.mt-20{
+    margin-top: 20px;
+}
+.btn-bubu.btn-3{
+    padding: 8px 30px;
+}
+.btn-bubu.btn-4{
+    padding: 10px 30px;
+}
+.btn-bubu.btn-sm{
+    padding: 4px 20px;
+    font-size: 12px;
+}
+.btn-bubu:hover,.btn-bubu:focus,.btn-bubu:active{
+    text-decoration: none;
+    color: #4f0e0f;
+}
+.btn-bubu {
+    display: inline-block;
+    padding: 4px 30px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: none;
+    border-radius: 0px;
+    outline: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    color: #4f0e0f;
+    background-image: url('../images/anniu.png');
+    background-size:100% 
+}

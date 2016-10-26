@@ -1,0 +1,26 @@
+{
+  "name": "wechat-server",
+  "version": "0.0.0",
+  "authors": [
+    "zhigang <haozhigang@outlook.com>"
+  ],
+  "description": "wx.bubumath.com",
+  "main": "webpack.config.js",
+  "keywords": [
+    "bubumath"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^1.9.1",
+    "jquery-form": "*",
+    "jquery-validation": "*",
+    "noty": "~2.3.8"
+  }
+}

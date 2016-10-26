@@ -1,0 +1,63 @@
+<p class="text-center">宝宝资料</p>
+<div class="wx-title">
+	<div class="wx-line"></div>
+	<span class="arrow"><span class="wx-caret"></span></span>
+</div>
+<div class="main-content">
+	<div class="mt-20">
+		<form name="form-name" role="form" action="/wx/profile" method="POST" data-validate="true" novalidate>
+			<div class="form-group">
+				<label for="childname">宝宝姓名</label>
+				<input type="text" class="form-control" required data-msg-required="请填写宝宝姓名" maxlength="20" isusername="true" id="childname" name="childname" placeholder="宝宝姓名" value="<%=userInfo.childname%>">
+			</div>
+			<div class="form-group">
+				<label for="childname">宝宝年龄</label>
+
+				<div class="wx-radio-inline">
+
+					<div class="radio">
+						<label>
+                  <input type="radio" name="age" value="3" <%=(userInfo.age==3)?'checked':''%> /><span class="circle"></span><span class="check"></span>
+                  3~4岁
+                </label>
+					</div>
+					<div class="radio">
+						<label>
+                  <input type="radio" name="age" value="4" <%=(userInfo.age==4)?'checked':''%> /><span class="circle"></span><span class="check"></span>
+                  4~5岁
+                </label>
+					</div>
+					<div class="radio">
+						<label>
+                  <input type="radio" name="age" value="5"  <%=(userInfo.age==5)?'checked':''%> /><span class="circle"></span><span class="check"></span>
+                  5岁+
+                </label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="mobilePhoneNumber">家长手机</label>
+				<input type="text" class="form-control" id="mobilePhoneNumber"  name="mobilePhoneNumber" value="<%=userInfo.mobilePhoneNumber%>"
+					placeholder="家长手机">
+			</div>
+			<div class="form-group">
+				<label for="email">家长邮箱</label>
+				<input type="email" class="form-control" data-msg-email="邮箱格式错误" id="email" name="email" value="<%=userInfo.email%>" placeholder="家长邮箱">
+			</div>
+			<div class="form-group">
+				<%if(error){%>
+					<div>
+						<%=error%>
+					</div>
+					<%}%>
+						<div class="mt-20 text-center">
+							<button class="btn-bubu">保存</button>
+						</div>
+			</div>
+		</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+
+</script>

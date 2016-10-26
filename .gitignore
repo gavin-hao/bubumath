@@ -1,0 +1,6 @@
+.avoscloud/
+.vscode
+config.js
+dist
+node_modules
+bower_components

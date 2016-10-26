@@ -1,0 +1,40 @@
+<link href="/css/wx.css" rel="stylesheet" type="text/css">
+<div class="head">
+	<div class="head-bg"><img data-src-800px="/images/beijing.png" /></div>
+</div>
+<p class="text-center">登录学习账号</p>
+<div class="wx-title">
+	<div class="wx-line"></div>
+	<span class="arrow"><span class="wx-caret"></span></span>
+</div>
+<div class="wx-container mt-20">
+    <% var redirect= (typeof returnTo=='undefined')?'':returnTo %>
+	<form action="/login?returnTo=<%=redirect %>" method="POST" data-validate="true" data-ajax="false" novalidate>
+		<div class="form-group">
+			<label for="username" class="control-label">学习账号</label>
+			<input type="text" class="form-control" required data-msg-required="请填写学习账号"  name="username" id="username" placeholder="学习账号">
+
+		</div>
+		<div class="form-group">
+			<label for="password" class=" control-label">登录密码</label>
+			<input type="password" class="form-control" required data-msg-required="请填写登录密码" name="password" id="password" placeholder="登录密码">
+
+		</div>
+		<div class="form-group">
+			<div class="">
+				<p>
+					<%=error%>
+				</p>
+				<button type="submit" name="login" class="btn btn-primary btn-block">登录</button>
+			</div>
+		</div>
+
+	</form>
+    <div class="mt-20">
+<% if(wechatConnect){%>
+		<p><a class="btn btn-success btn-block" href="<%= wechatConnect%>">微信登录</a></p>
+		<%}%>
+    </div>
+	
+</div>
+<script src="/js/wx.js"></script>
