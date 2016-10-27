@@ -35,6 +35,9 @@ function notification(type, text) {
     //console.log(type + ' - ' + n.options.id);
     return n;
 }
+$.validator.addMethod("mobileCN", function (value, element) {
+    return this.optional(element) || /^(\+?0?86\-?)?1[345789]\d{9}$/.test(value);
+}, "请输入正确的手机号");
 $.validator.addMethod("isusername", function (value, element) {
     return this.optional(element) || /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/i.test(value);
 }, "只能包含中文,英文字母,下划线 _");
@@ -105,7 +108,7 @@ var ManagedMessage = {
 }
 function registAjaxEvent() {
     function showErrorMessage(data) {
-        data.message == data.message || "出错了～";
+        data.message = (data.message || "出错了～");
         var msg = ManagedMessage[data.message] ? ManagedMessage[data.message] : data.message
         $('#error_summary').text(msg);
     }
@@ -152,11 +155,11 @@ function registAjaxEvent() {
 
     });
     $(document).on('as.ajax.error', function (e, data) {
-        if (data.status > 400 && data.status < 404) {
+        if (data&&data.status > 400 && data.status < 404) {
             //authenticate error, need login
             window.location.href = window.location.href;
         } else {
-            data.message == data.message || "出错了～";
+            data.message = (data.message || "出错了～");
             var msg = ManagedMessage[data.message] ? ManagedMessage[data.message] : data.message;
             notification('error', msg);
             // $('#error_summary').text(msg);

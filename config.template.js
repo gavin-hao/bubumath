@@ -8,6 +8,10 @@ exports.wechat_mp = {
     appid: 'appid',
     encodingAESKey: 'key'
 };
-
+exports.leancloud={
+    leancloud_app_id:'leancloud appid',
+    leancloud_app_key:'leancloud appkey',
+    leancloud_app_master_key:'leancloud_app_master_key'
+}
 var domain = exports.domain = 'your website domain';
 

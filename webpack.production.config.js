@@ -2,10 +2,10 @@
 
 var path = require('path');
 var webpack = require('webpack');
-// var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
-
+console.log("start building frontend js ,css ...");
 module.exports = {
   context: path.join(__dirname, 'public'),
   // devtool: 'eval-source-map',
@@ -18,46 +18,52 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist/'),
     filename: 'js/[name].js',
-    publicPath: '/'
+    publicPath: '/',
+    chunkFilename: '[chunkhash].js'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     // new HtmlWebpackPlugin({
-    //   template: 'public/index.tpl.html',
-    //   inject: 'body',
-    //   filename: 'index.html'
+    //     template: 'public/index.tpl.html',
+    //     inject: true,
+    //     filename: 'tpl.html'
     // }),
     new webpack.optimize.CommonsChunkPlugin({ names: ['vendors'], filename: 'js/[name].js', minChunks: Infinity, children: false, }),
     new ExtractTextPlugin("css/[name].css", { allChunks: true }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    // new ExtractTextPlugin('[name]-[hash].min.css'),
+    new webpack.NoErrorsPlugin(),
+    new StatsPlugin('webpack.stats.json', {
+      source: false,
+      modules: false
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false,
         screw_ie8: true
       }
     }),
-    new StatsPlugin('webpack.stats.json', {
-      source: false,
-      modules: false
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
+    //This will now automatically inject the $ and jQuery variables into every module, so you no longer need to require them.
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
   ],
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      exclude: /node_modules/,
+      exclude: /(node_modules|bower_components)/,
       loader: 'babel',
       query: {
-        "presets": ["es2015", "stage-0", "react"]
+        "presets": ["react", "es2015", "stage-0", "react-hmre"]
       }
     },
+    {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+    },
+    // { test: /\.(png|jpg)$/, loader: 'url-loader?mimetype=image/png&limit=8192' },
     {
       test: /\.(jpg|jpeg|gif|png)$/,
       exclude: /node_modules/,
@@ -68,14 +74,12 @@ module.exports = {
       test: /\.json?$/,
       loader: 'json'
     },
-    {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader?minimize')
-    }]
+
+
+    { test: /jquery\.js$/, loader: 'expose?$' },
+    { test: /jquery\.js$/, loader: 'expose?jQuery' }
+    ]
   },
-  postcss: [
-    require('autoprefixer')
-  ],
   resolve: {
     alias: {
       "jquery": "jquery/dist/jquery.js",
@@ -95,5 +99,9 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.json'],
     modulesDirectories: ['node_modules', 'bower_components', 'build'],
   },
-  externals: {}
+  externals: {
+    // Use external version of React (from CDN for client-side, or bundled with ReactJS.NET for server-side)
+    // Comment this out if you want to load your own version of React
+    //react: 'React'
+  }
 };

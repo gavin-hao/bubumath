@@ -131,7 +131,7 @@ router.post('/profile', wrap(function* (req, res, next) {
     var uid = req.user.id;
     var user = yield userStore.findUserById(uid);
     user.setEmail(model.email)
-    user.set('mobilePhoneNumber', model.mobilePhoneNumber);
+    user.set('mobilePhoneNumber', (model.mobilePhoneNumber||null));
     user.set('childname', model.childname);
     user.setEmail(model.email || null);
     var b = moment().startOf('month').startOf('days').subtract(parseInt(model.age), "years").toDate();

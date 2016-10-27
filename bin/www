@@ -9,11 +9,11 @@ var debug = require('debug')('wechat_server:server');
 var http = require('http');
 //leancloud SDK
 var AV = require('leanengine');
-
+var config=require('../config').leancloud;
 AV.init({
-  appId: process.env.LEANCLOUD_APP_ID || '1Wc1dUpbqxRhtP1q4nW9QRGY-gzGzoHsz',
-  appKey: process.env.LEANCLOUD_APP_KEY || 'dnmROpv9o8W3Nuv2PkXHCCYm',
-  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'kQH3hkiGecAflwN6pjmPO9Uv'
+  appId: process.env.LEANCLOUD_APP_ID || config.leancloud_app_id,
+  appKey: process.env.LEANCLOUD_APP_KEY || config.leancloud_app_key,
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || config.leancloud_app_master_key
 });
 // 如果不希望使用 masterKey 权限，可以将下面一行删除
 AV.Cloud.useMasterKey();

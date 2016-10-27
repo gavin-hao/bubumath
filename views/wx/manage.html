@@ -57,7 +57,8 @@
 				<button type="submit" class="btn-bubu btn-4 ">绑定微信</button>
 			</form>
 			<%}else{%>
-				<form id="disass" action="/wx/disassociate?returnTo=/logout" method="GET">
+				<form id="disass" action="/wx/disassociate" method="GET">
+					<input type="hidden" name="returnTo" value="/logout" />
 					<input type="hidden" name="provider" value="wechat" />
 					<input type="hidden" name="providerKey" value="<%=wechatAuth.id%>" />
 					<button type="button" id="btn-disassociate" class="btn-bubu btn-4 ">解除绑定</button>

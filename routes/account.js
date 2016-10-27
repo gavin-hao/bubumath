@@ -75,7 +75,7 @@ router.get('/auth/wechat/connect', wrap(function* (req, res, next) {
     return res.redirect('/wx/manage');
 }));
 
-router.get('/link/wechat', function (req, res, next) {
+router.get('/link/wechat',auth.authorize(), function (req, res, next) {
     var returnUrl = req.query.returnTo || '/';
     var state = new Buffer(returnUrl, 'utf8').toString('base64');
     passport.authenticate('wechat', {
@@ -84,7 +84,7 @@ router.get('/link/wechat', function (req, res, next) {
         scope: 'snsapi_userinfo'
     })(req, res, next);
 });
-router.get('/link/wechat/callback', function (req, res, next) {
+router.get('/link/wechat/callback',auth.authorize(), function (req, res, next) {
 
     passport.authenticate('wechat', function (err, user, info) {
         if (err) { return next(err) }
@@ -96,6 +96,7 @@ router.get('/link/wechat/callback', function (req, res, next) {
         //     }
         //     return res.redirect('/auth/wechat/connect');
         // });
+        // console.log('link wechat callback-->', err, user, info)
         co(function* () {
             if (err) {
 
@@ -111,10 +112,10 @@ router.get('/link/wechat/callback', function (req, res, next) {
             if (o && o.id) {
                 return res.redirect('/wx/manage');
             }
-            var login = yield userStore.addLogin(loginInfo.loginProvider, loginInfo.id, user.id, loginInfo.unionid);
+            var login = yield userStore.addLogin(loginInfo.loginProvider, loginInfo.id, req.user.id, loginInfo.unionid);
             return res.redirect('/wx/manage');
-        })(req, res, next);
-    });
+        }).catch(err=>next(err));
+    })(req, res, next);
 });
 
 router.get('/auth/fail', function (req, res, next) {
