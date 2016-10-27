@@ -1,5 +1,5 @@
 # bubumath
 bubumath wechat mp website
-#Install
-1. run npm Install;
-2. run bower Install
+#Get Start
+1. > npm Install;
+2. > bower Install;
